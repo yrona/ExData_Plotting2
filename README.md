@@ -13,9 +13,11 @@ It contains all the code needed to generate the plots from the source data, <a h
 ### Preparation
 #### Libraries Required
 * downloader
+* ggplot2
 
 ```
 library(downloader)
+library(ggplot2)
 ```
 
 #### Files to source
@@ -29,6 +31,10 @@ library(downloader)
     + **make.NEI.plot1**: Reads the PM2.5 data and produces a plot of total US Emissions by year.
 * **Plot2.R**
     + **make.NEI.plot2**: Reads the PM2.5 data and produces a plot of total Emissions by year within Baltimore, MD.
+* **Plot3.R**
+    + **make.NEI.plot3**: Reads the PM2.5 data and produces a plot of total Emissions by year within Baltimore, MD broken down by type.
+* **Plot4.R**
+    + **make.NEI.plot4**: Reads the PM2.5 data and SCC data and produces a plot of total Emissions from coal use by year within the US broken down by EI Sector.
 
 ### Execution
 

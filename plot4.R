@@ -35,31 +35,31 @@ make.NEI.plot4 <- function() {
   
   #The aggregate function behaves like tapply, except we get a dataframe as output
   #With col1 containing years, col2 containing types, col3 containing total emissions
-  plot4.data <- aggregate(my.full.data.extended$Emissions, list(Year = my.full.data.extended$year, Sector = my.full.data.extended$my.cc.coalsubset.EI.Sector), FUN = sum)
+  plot4.data <- aggregate(my.full.data.extended$Emissions, list(Year = my.full.data.extended$year, Source = my.full.data.extended$type), FUN = sum)
   names(plot4.data)[names(plot4.data)=='x'] <- 'Emission'
   
   #Now we turn to the order in which the layers will be stacked in the eventual plot
   
   #We start by getting the total emissions for each sector type over all years
-  plot4.order.data <-  aggregate(my.full.data.extended$Emissions, list(Sector = my.full.data.extended$my.cc.coalsubset.EI.Sector), FUN = sum)
+  plot4.order.data <-  aggregate(my.full.data.extended$Emissions, list(Source = my.full.data.extended$type), FUN = sum)
   
   #We then rename the column x to TotalEmissions so that it's less confusing down the road
   names(plot4.order.data)[names(plot4.order.data)=='x'] <- 'TotalEmission'
   
   #Now we add the Total Emissions column to the plot 4 data (we will use it for sorting the data)
-  plot4.data <-  merge(plot4.data,plot4.order.data, by.x = "Sector", by.y = "Sector")
+  plot4.data <-  merge(plot4.data,plot4.order.data, by.x = "Source", by.y = "Source")
   
   #Now we sort the data so that when qplot is executed, the smallest emission source goes on the bottom, and larger goes on top
   plot4.data <- plot4.data[order(plot4.data$Year,plot4.data$TotalEmission),]
   
   #png("plot2.png")
   
-  cplot <- qplot(Year,Emission, data = plot4.data, colour = Sector)  #Plots Emissions (x) vs Year using different colors 
+  cplot <- qplot(Year,Emission, data = plot4.data, colour = Source)  #Plots Emissions (x) vs Year using different colors 
   #for the points based on EI.Sector
   #Automatically generates the legend as well.
   
   
-  cplot <- cplot + geom_area(aes(colour = Sector, fill = Sector),position = 'stack') #Stacked layer plot
+  cplot <- cplot + geom_area(aes(colour = Source, fill = Source),position = 'stack') #Stacked layer plot
   
   cplot <- cplot + ylab("Total Emissions")  # Labels the y axis (the x is automatically labeles 
   # with the name of the Year column in the original data frame).

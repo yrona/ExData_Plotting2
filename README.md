@@ -34,7 +34,9 @@ library(ggplot2)
 * **Plot3.R**
     + **make.NEI.plot3**: Reads the PM2.5 data and produces a plot of total Emissions by year within Baltimore, MD broken down by type.
 * **Plot4.R**
-    + **make.NEI.plot4**: Reads the PM2.5 data and SCC data and produces a plot of total Emissions from coal use by year within the US broken down by EI Sector.
+    + **make.NEI.plot4**: Reads the PM2.5 data and SCC data and produces a plot of total Emissions from coal use by year within the US broken down by Type (ie Source).
+* **Plot5.R**
+    + **make.NEI.plot5**: Reads the PM2.5 data and SCC data and produces a plot of total Emissions from different types of motor vehicles by year within Baltimore city broken down by EI Sector.
 
 ### Execution
 

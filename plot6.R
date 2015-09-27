@@ -79,17 +79,27 @@ make.NEI.plot6 <- function() {
 # 
 #   cplot.la <- dressplot_layer(cplot.la) + ggtitle("Motor Vehicle PM2.5 Emissions LA County")  # Adds a Chart title.
   
-  cplot.all <- qplot(Year,Emission, data = plot6.data, colour = Sector, aes(Sector,fips)) + facet_grid(. ~location)  + geom_point(aes(shape = factor(fips), size=3)) + scale_size_identity(guide=FALSE) 
-               
+#   cplot.all <- qplot(Year,Emission, data = plot6.data, colour = Sector, aes(Sector,fips)) + facet_grid(. ~location)  + geom_point(aes(shape = factor(fips), size=3)) + scale_size_identity(guide=FALSE) 
+#                
+#   
+#   for (i in unique(plot6.data$Sector)) {
+#     for (j in unique(plot6.data$fips)) {
+#       cplot.all <- cplot.all + geom_line(data = subset(plot6.data, (fips == j) & (Sector == i)))
+#     }
+#   }
+#   
+#   cplot.all <- cplot.all  + coord_trans(y="log10")  + scale_shape_discrete(name = "Location",breaks=c("06037","24510"),labels=c("LA County","Baltimore City")) + ggtitle("Motor Vehicle PM2.5 Emission Levels LA County and Baltimore City")
   
-  for (i in unique(plot6.data$Sector)) {
-    for (j in unique(plot6.data$fips)) {
-      cplot.all <- cplot.all + geom_line(data = subset(plot6.data, (fips == j) & (Sector == i)))
-    }
-  }
+  cplot.all <- qplot(Year,Emission, data = plot6.data, colour = Sector)  + facet_grid(. ~location)  #Plots Emissions (x) vs Year using different colors 
+                                                                                                     #for the points based on EI.Sector fo Bal
+                                                                                                     #Automatically generates the legend as well.
   
-  cplot.all <- cplot.all  + coord_trans(y="log10")  + scale_shape_discrete(name = "Location",breaks=c("06037","24510"),labels=c("LA County","Baltimore City")) + ggtitle("Motor Vehicle PM2.5 Emission Levels LA County and Baltimore City")
+  cplot.all <- cplot.all + geom_area(aes(colour = Sector, fill = Sector),position = 'stack')
   
+  cplot.all <- cplot.all +  ylab("Total Emissions")  # Labels the y axis and makes it a log scale
+  
+  cplot.all <- cplot.all + ggtitle("Motor Vehicle PM2.5 Emissions Baltimore City vd LA County")
+     
   ggsave("plot6.png",cplot.all)
   
   #dev.off()

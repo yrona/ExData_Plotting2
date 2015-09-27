@@ -37,6 +37,8 @@ library(ggplot2)
     + **make.NEI.plot4**: Reads the PM2.5 data and SCC data and produces a plot of total Emissions from coal use by year within the US broken down by Type (ie Source).
 * **Plot5.R**
     + **make.NEI.plot5**: Reads the PM2.5 data and SCC data and produces a plot of total Emissions from different types of motor vehicles by year within Baltimore city broken down by EI Sector.
+* **Plot6.R**
+    + **make.NEI.plot6**: Reads the PM2.5 data and SCC data and produces a plots of total Emissions from different types of motor vehicles by year broken down by EI Sector comparing Baltimore City with LA County.
 
 ### Execution
 
